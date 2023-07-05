@@ -5,11 +5,6 @@ import uuid4 from "uuid4";
 export const TodoList = () => {
   /* Se usara el Hook USESTATE */
   const [todos, setTodos] = useState([
-    { id: 1, task: "Tarea 1 🍕", completed: true },
-    { id: 2, task: "Tarea 2 😶‍🌫️", completed: false },
-    { id: 3, task: "Tarea 3 🍔", completed: true },
-    { id: 4, task: "Tarea 4 🍟", completed: false },
-    { id: 5, task: "Tarea 5 🍿", completed: true },
   ]);
 
   const nuevaTarea = () => {
@@ -25,6 +20,12 @@ export const TodoList = () => {
       };
       return [...prevTodos, newTask]; //Tarea investigar
     });
+  };
+
+  const limpiarTareas = () => {
+    //Cuenta todas las tareas que aun no se realizan
+    const newTodos = todos.filter((todo) => !todo.completed);
+    setTodos(newTodos)
   };
 
   const contadorTareas = () => {
@@ -91,7 +92,7 @@ export const TodoList = () => {
         <button className="btn btn-success ms-2" onClick={nuevaTarea}>
           <i className="bi bi-folder-plus" ></i>
         </button>
-        <button className="btn btn-danger ms-2">
+        <button className="btn btn-danger ms-2" onClick={limpiarTareas}>
           <i className="bi bi-trash" ></i>
         </button>
       </div>
